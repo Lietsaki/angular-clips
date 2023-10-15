@@ -76,4 +76,16 @@ export class ManageComponent implements OnInit {
     await this.clipService.deleteClip(clipToDelete);
     this.clips = this.clips.filter((clip) => clip.docID !== clipToDelete.docID);
   }
+
+  async copyToClipboard($event: MouseEvent, clipID?: string) {
+    $event.preventDefault();
+
+    if (!clipID) {
+      return;
+    }
+
+    const url = `${location.origin}/clip/${clipID}`;
+    await navigator.clipboard.writeText(url);
+    alert('Link copied!');
+  }
 }

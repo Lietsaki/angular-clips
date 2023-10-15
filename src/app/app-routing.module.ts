@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ClipService } from './services/clip.service';
 
 const routes: Routes = [
   {
@@ -17,6 +18,18 @@ const routes: Routes = [
   {
     path: 'clip/:id',
     component: ClipComponent,
+    // Search for a function called 'resolve' in ClipService
+    // and call it whenever a user visits the route (if available).
+    // It will run even before ngOnInit.
+    resolve: {
+      clip: ClipService,
+    },
+  },
+  // Lazyload (only load them when the user visits them) video modules from this point
+  {
+    path: '',
+    loadChildren: async () =>
+      (await import('./video/video.module')).VideoModule,
   },
   {
     path: '**',
