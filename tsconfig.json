@@ -27,5 +27,8 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  // Cypress causes errors with Jasmine's types. This fixes it (See https://github.com/cypress-io/cypress/issues/7552)
+  "include": ["src", "node_modules/cypress"],
+  "exclude": ["node_modules/cypress"]
 }
